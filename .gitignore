@@ -1,0 +1,9 @@
+# Backup outputs
+*.tar.gz
+*.osz
+osu_backup/
+osz_maps/
+
+# OS
+.DS_Store
+Thumbs.db
