@@ -21,7 +21,7 @@ This tool was created with help of AI so there can be plenty of bugs.
 - `zip` (for mode 2)
 - `tar` (for mode 3)
 
-Install on Arch/Garuda:
+Install on Arch:
 ```bash
 sudo pacman -S rsync zip tar
 ```
@@ -72,14 +72,14 @@ If none match, it does a deep `find` search and lets you pick, or enter the path
 
 ---
 
-## 🔄 Migrating to a new distro (example: Fedora → Garuda Mokka)
+## 🔄 Migrating to a new distro (example: Fedora → Arch)
 
 ```bash
 # 1. On Fedora — run the script, choose mode 1, save to external drive
 ./osu_backup.sh
 # → choose /media/usb/osu_backup as destination
 
-# 2. Install Garuda Mokka, install osu! (osu-wine or similar)
+# 2. Install Arch, install osu! (osu-wine or similar)
 
 # 3. Copy Songs back
 rsync -av /media/usb/osu_backup/Songs/ ~/.local/share/osu-wine/osu!/Songs/
