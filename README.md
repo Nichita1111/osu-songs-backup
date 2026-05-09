@@ -1,6 +1,7 @@
 # osu-songs-backup
 
 A simple interactive bash script that automatically finds your osu! Songs folder and backs it up — whether you're migrating to a new distro or just want a backup.
+This tool was created with help of AI so there can be plenty of bugs.
 
 ---
 
