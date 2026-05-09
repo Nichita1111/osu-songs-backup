@@ -126,10 +126,13 @@ case $MODE in
 
         COUNT=0
         ERRORS=0
-        while IFS= read -r dir; do
+        while IFS= read -r -d '' dir; do
             dirname=$(basename "$dir")
-            outfile="$OSZ_DIR/${dirname}.osz"
-            (cd "$SONGS_PATH" && zip -r "$outfile" "$dirname" -q)
+            # Sanitize filename: replace special chars with _ for the .osz filename
+            safe_name=$(echo "$dirname" | tr '[][*?:\\/<>"|{}]' '_')
+            outfile="$OSZ_DIR/${safe_name}.osz"
+            # Use -nw (no wildcards) to prevent glob expansion on special chars
+            (cd "$SONGS_PATH" && zip -nw -r "$outfile" "$dirname" -q)
             if [ $? -eq 0 ]; then
                 ((COUNT++))
                 echo -ne "  ${GREEN}✓${RESET} [$COUNT/$MAP_COUNT] $dirname\r"
@@ -137,7 +140,7 @@ case $MODE in
                 ((ERRORS++))
                 echo -e "  ${RED}✗${RESET} Ошибка: $dirname"
             fi
-        done < <(find "$SONGS_PATH" -maxdepth 1 -mindepth 1 -type d)
+        done < <(find "$SONGS_PATH" -maxdepth 1 -mindepth 1 -type d -print0)
 
         echo -e "\n\n${GREEN}${BOLD}  ✓ Готово!${RESET}"
         echo -e "  Упаковано: ${GREEN}$COUNT${RESET} | Ошибок: ${RED}$ERRORS${RESET}"
